@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { renderToString } from 'react-dom/server';
 import { BrowserRouter, StaticRouter } from "react-router-dom";
-import { getPrefix, getUuid, getUrl } from "@karpeleslab/klbfw";
+import { getPrefix, getUuid, getUrl, getInitialState } from "@karpeleslab/klbfw";
 
 export const Context = React.createContext({});
 Context.displayName = "Context";
@@ -58,19 +58,25 @@ export function usePromise(prom) {
 	ctx["@promises"].add(prom);
 }
 
+// this function will return a ssr renderer for a given root component.
+// example use: global._renderToString = makeRenderer(<App/>);
 export function makeRenderer(app) {
 	return function(cbk) {
-		let result = { uuid: getUuid() };
+		let result = { uuid: getUuid(), initial: {} };
 
 		try {
 			let context = {};
+			let varCtx = {};
 
 			result.app = renderToString(
-				<StaticRouter context={context} basename={getPrefix()} location={getUrl().full}>
-					{app}
-				</StaticRouter>
+				<Context.Provider value={varCtx}>
+					<StaticRouter context={context} basename={getPrefix()} location={getUrl().full}>
+						{app}
+					</StaticRouter>
+				</Context.Provider>
 			);
 
+			// handle context from StaticRouter
 			if (context.status)
 				result.statusCode = context.status;
 
@@ -78,6 +84,12 @@ export function makeRenderer(app) {
 				result.redirect = context.url;
 				cbk(result);
 				return;
+			}
+
+			// pass values from varCtx to result.initial (only those not starting with @)
+			for(let varName in varCtx) {
+				if (varName.charAt(0) === "@") continue;
+				result.initial[varName] = varCtx[varName].value;
 			}
 
 			// grab helmet if available
@@ -108,6 +120,27 @@ export function run(app) {
 	global._renderToString = makeRenderer(app);
 
 	if (typeof window !== 'undefined') {
-		ReactDOM.render(<BrowserRouter basename={getPrefix()}>{app}</BrowserRouter>, document.getElementById('root'));
+		let ctx = {};
+
+		// read getInitialState()
+		let init = getInitialState();
+		for(let varName in init) {
+			ctx[varName] = {
+				value: init[varName],
+				subscribers: new Set(),
+				setter: newVal => {
+					ctx[varName].value = newVal;
+					ctx[varName].subscribers.forEach(cb => cb(newVal));
+				}
+			};
+		}
+
+		ReactDOM.render(
+			<Context.Provider value={ctx}>
+				<BrowserRouter basename={getPrefix()}>
+					{app}
+				</BrowserRouter>
+			</Context.Provider>
+		, document.getElementById('root'));
 	}
 }
