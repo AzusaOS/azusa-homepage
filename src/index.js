@@ -30,6 +30,15 @@ global._renderToString = (cbk) => {
 			</StaticRouter>
 		);
 
+		if (context.status)
+			result.statusCode = context.status;
+
+		if (context.url) {
+			result.redirect = context.url;
+			cbk(result);
+			return;
+		}
+
 		// grab helmet
 		Helmet.canUseDOM = false;
 		const helmet = Helmet.renderStatic();
