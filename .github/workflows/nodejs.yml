@@ -1,0 +1,32 @@
+name: Node.js CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    env:
+      API_PREFIX: "https://ws.atonline.com/_special/rest/"
+      CT_HEADER: "Content-Type: application/zip"
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - run: npm install
+    - run: npm run build
+    - run: apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -y install zip jq curl
+    - run: mv build dist
+    - run: zip -9r final.zip dist etc
+    - run: COMMIT_DATE=`git show -s --format=%ci "${GITHUB_SHA}"`
+    - run: COMMIT_NAME=`git show -s --format=%cn "${GITHUB_SHA}"`
+    - run: COMMIT_EMAIL=`git show -s --format=%ce "${GITHUB_SHA}"`
+    - run: API_INFO=`curl -s --data-urlencode "server=${DEPLOY_SERVER}" --data-urlencode "token=${DEPLOY_TOKEN}" --data-urlencode "branch=${GITHUB_REF}" --data-urlencode "commit=${GITHUB_SHA}" --data-urlencode "login=${GITHUB_ACTOR}" --data-urlencode "email=${COMMIT_EMAIL}" --data-urlencode "user_id=${GITHUB_ACTOR}" --data-urlencode "user_name=${COMMIT_NAME}" --data-urlencode "project=https://github.com/${GITHUB_REPOSITORY}" --data-urlencode "commit_date=${COMMIT_DATE}" "${API_PREFIX}Server/Version:upload"`
+    - run: API_PUT=`echo "$API_INFO" | jq -r .data.PUT -`
+    - run: API_COMP=`echo "$API_INFO" | jq -r .data.Complete -`
+    - run: curl "-#" -T "final.zip" -H "$CT_HEADER" "$API_PUT" >/dev/null # upload file
+    - run: curl -s "${API_PREFIX}${API_COMP}"; echo # notify upload complete
