@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function App() {
 	return (
