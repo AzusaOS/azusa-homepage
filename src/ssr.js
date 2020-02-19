@@ -117,8 +117,6 @@ export function makeRenderer(app) {
 }
 
 export function run(app) {
-	global._renderToString = makeRenderer(app);
-
 	if (typeof window !== 'undefined') {
 		let ctx = {};
 
@@ -142,5 +140,7 @@ export function run(app) {
 				</BrowserRouter>
 			</Context.Provider>
 		, document.getElementById('root'));
+	} else {
+		global._renderToString = makeRenderer(app);
 	}
 }
