@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { run } from "./ssr.js";
+import { run } from "@karpeleslab/react-klbfw-hooks";
 
 run(<App/>);
 
