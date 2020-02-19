@@ -2,19 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { Helmet } from "react-helmet";
 import * as serviceWorker from './serviceWorker';
+import { renderToString } from 'react-dom/server';
 import { BrowserRouter, StaticRouter } from "react-router-dom";
-import { getPrefix, getUuid } from "@karpeleslab/klbfw";
+import { getPrefix, getUuid, getUrl } from "@karpeleslab/klbfw";
 
 if(typeof window !== 'undefined') {
 	// in browser
 	ReactDOM.render(<BrowserRouter basename={getPrefix()}><App /></BrowserRouter>, document.getElementById('root'));
 }
 
-global._renderToString = () => {
+global._renderToString = (cbk) => {
 	let result = { uuid: getUuid() };
 
 	try {
+		let context = {};
+
 		result.app = renderToString(
 			<StaticRouter context={context} basename={getPrefix()} location={getUrl().full}>
 				<App />
