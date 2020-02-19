@@ -19,7 +19,7 @@ jobs:
         node-version: 12.x
     - run: npm install
     - run: npm run build
-    - run: apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -y install zip jq curl
+    - run: sudo apt-get update -qq && DEBIAN_FRONTEND=noninteractive sudo apt-get -y install zip jq curl
     - run: mv build dist
     - run: zip -9r final.zip dist etc
     - run: COMMIT_DATE=`git show -s --format=%ci "${GITHUB_SHA}"`
