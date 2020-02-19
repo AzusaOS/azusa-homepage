@@ -7,6 +7,11 @@ function App() {
 		<div className="App">
 			<header className="App-header">
 				<Route exact path="/">
+					<Helmet>
+						<meta charSet="utf-8" />
+						<title>AZUSA</title>
+						<meta name="description" content="Todo" />
+					</Helmet>
 					<h1>AZUSA</h1>
 				</Route>
 			</header>
