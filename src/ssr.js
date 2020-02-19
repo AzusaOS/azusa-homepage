@@ -120,26 +120,36 @@ export function run(app) {
 	if (typeof window !== 'undefined') {
 		let ctx = {};
 
-		// read getInitialState()
-		let init = getInitialState();
-		for(let varName in init) {
-			ctx[varName] = {
-				value: init[varName],
-				subscribers: new Set(),
-				setter: newVal => {
-					ctx[varName].value = newVal;
-					ctx[varName].subscribers.forEach(cb => cb(newVal));
-				}
-			};
-		}
-
-		ReactDOM.render(
+		// initialize app for client rendering
+		app = (
 			<Context.Provider value={ctx}>
 				<BrowserRouter basename={getPrefix()}>
 					{app}
 				</BrowserRouter>
 			</Context.Provider>
-		, document.getElementById('root'));
+		);
+
+		// read getInitialState()
+		let init = getInitialState();
+
+		if (typeof init === "object") {
+			for(let varName in init) {
+				ctx[varName] = {
+					value: init[varName],
+					subscribers: new Set(),
+					setter: newVal => {
+						ctx[varName].value = newVal;
+						ctx[varName].subscribers.forEach(cb => cb(newVal));
+					}
+				};
+			}
+
+			ReactDOM.hydrate(app, document.getElementById('root'));
+			return;
+		}
+
+		// SSR did not run, go through rendering
+		ReactDOM.render(app, document.getElementById('root'));
 	} else {
 		global._renderToString = makeRenderer(app);
 	}
