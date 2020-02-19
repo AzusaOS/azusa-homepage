@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Helmet } from "react-helmet";
 import { renderToString } from 'react-dom/server';
 import { BrowserRouter, StaticRouter } from "react-router-dom";
 import { getPrefix, getUuid, getUrl } from "@karpeleslab/klbfw";
@@ -27,18 +26,23 @@ export function makeRenderer(app) {
 				return;
 			}
 
-			// grab helmet
-			Helmet.canUseDOM = false;
-			const helmet = Helmet.renderStatic();
+			// grab helmet if available
+			try {
+				const Helmet = require("react-helmet").Helmet;
+				Helmet.canUseDOM = false;
+				const helmet = Helmet.renderStatic();
 
-			result.title = helmet.title ? helmet.title.toString() : null;
-			result.meta = helmet.meta ? helmet.meta.toString() : null;
-			result.script = helmet.script ? helmet.script.toString() : null;
-			result.link = helmet.link ? helmet.link.toString() : null;
-			result.bodyAttributes = helmet.bodyAttributes ? helmet.bodyAttributes.toString() : null;
-			result.htmlAttributes = helmet.htmlAttributes ? helmet.htmlAttributes.toString() : null;
+				result.title = helmet.title ? helmet.title.toString() : null;
+				result.meta = helmet.meta ? helmet.meta.toString() : null;
+				result.script = helmet.script ? helmet.script.toString() : null;
+				result.link = helmet.link ? helmet.link.toString() : null;
+				result.bodyAttributes = helmet.bodyAttributes ? helmet.bodyAttributes.toString() : null;
+				result.htmlAttributes = helmet.htmlAttributes ? helmet.htmlAttributes.toString() : null;
 
-			cbk(result);
+				cbk(result);
+			} catch(e) {
+				// ignore
+			}
 		} catch(e) {
 			result.error = e;
 			cbk(result);
