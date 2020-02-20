@@ -4,6 +4,17 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 
+function Status({ code, children }) {
+	return (
+		<Route
+			render={({ staticContext }) => {
+				if (staticContext) staticContext.status = code;
+				return children;
+			}}
+		/>
+	);
+}
+
 function App() {
 	const { t } = useTranslation();
 
@@ -21,11 +32,13 @@ function App() {
 					<Route exact path="/">
 						<Redirect to="/coming-soon" />
 					</Route>
-					<Route status="404">
+					<Route>
 						<Helmet>
 							<title>{t("azusa_title")} - Not Found</title>
 						</Helmet>
-						<h1>Page not found</h1>
+						<Status code={404}>
+							<h1>Page not found</h1>
+						</Status>
 					</Route>
 				</Switch>
 			</header>
