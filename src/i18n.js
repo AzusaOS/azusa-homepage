@@ -4,9 +4,6 @@ import { Backend } from '@karpeleslab/i18next-klb-backend';
 import { getLocale } from "@karpeleslab/klbfw";
 
 let initOptions = {
-	ns: ['translation'],
-	defaultNS: 'translation',
-	debug: false,
 	lng: getLocale(),
 	initImmediate: false,
 	load: 'currentOnly',
@@ -16,7 +13,7 @@ let initOptions = {
 	react: {
 		useSuspense: false,
 	}
-}
+};
 
 export const i18nPromise = i18n
 	// load translation using klb system
