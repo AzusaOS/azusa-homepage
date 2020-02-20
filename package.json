@@ -6,7 +6,7 @@
   "dependencies": {
     "@karpeleslab/i18next-klb-backend": "0.0.5",
     "@karpeleslab/klbfw": "0.0.25",
-    "@karpeleslab/react-klbfw-hooks": "^0.1.6",
+    "@karpeleslab/react-klbfw-hooks": "^0.1.7",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",

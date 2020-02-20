@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 
+// we use this to pass a given status code to the SSR system
 function Status({ code, children }) {
 	return (
 		<Route
