@@ -8,12 +8,12 @@ let initOptions = {
 	defaultNS: 'translation',
 	debug: false,
 	lng: getLocale(),
+	initImmediate: false,
 	load: 'currentOnly',
 	interpolation: {
 		escapeValue: false, // not needed for react as it escapes by default
 	},
 	react: {
-		wait: true,
 		useSuspense: false,
 	}
 }
