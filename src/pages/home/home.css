@@ -1,0 +1,97 @@
+.navbar {
+  background-color: transparent;
+}
+
+.burger {
+  margin-top: 38px;
+}
+
+.navbar-brand a {
+  color: #8059ce;
+  font-size: 34px;
+  font-family: Lato;
+  font-weight: 300;
+}
+.navbar-end .navbar-standard {
+  color: #707070;
+  font-size: 15px;
+  font-family: Helvetica;
+  font-weight: 300;
+}
+
+.item-color {
+  color: #8059ce;
+}
+
+#first-section {
+  padding-top: 5%;
+  text-align: center;
+}
+
+.Azusav2 {
+  width: 837px;
+  height: 1195px;
+}
+
+.second-section {
+  transform: rotate(-3deg);
+}
+
+.second-section .box {
+  border-radius: 50px;
+}
+
+#third-section {
+  margin-top: 10%;
+}
+
+#third-section h1 {
+  text-align: left;
+  font-size: 29px;
+  font-family: Helvetica;
+  color: #707070;
+  padding-bottom: 5%;
+}
+
+#third-section h2 {
+  text-align: left;
+  font-size: 24px;
+  font-family: Helvetica;
+  color: #717171;
+}
+
+#third-section p {
+  font-size: 17px;
+  font-family: Helvetica;
+  letter-spacing: 0;
+  color: #707070;
+  opacity: 1;
+  padding-top: 5%;
+}
+
+#third-section .button {
+  width: 100%;
+  background-color: #8059ce;
+  color: #ffffff;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Helvetica;
+  margin-top: 8.5%;
+}
+
+#third-section p {
+  padding: 10%;
+}
+
+.footer {
+  margin-top: 10%;
+  padding: 0;
+  border-top: 2px ridge rgb(242, 242, 242, 1);
+  background-color: white;
+}
+
+#test {
+  margin-bottom: 2%;
+  display: -webkit-inline-box;
+}

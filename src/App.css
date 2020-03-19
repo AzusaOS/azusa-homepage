@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  background-image: url("./img/polygbgrpurple@2x.png");
 }
 
 .App-header {
@@ -10,3 +10,4 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
 }
+
