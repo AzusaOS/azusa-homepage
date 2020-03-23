@@ -100,6 +100,9 @@ export const StyledContactButton = styled(StyledButton)`
   margin-top: 5%;
   padding-left: 100px !important;
   padding-right: 100px !important;
+  &:disabled {
+    color: #363636;
+  }
 `;
 
 export const StyledLink = styled(Link)`
@@ -163,6 +166,13 @@ export const StyledContactP = styled(StyledP)`
   text-align: left;
   padding-top: 2%;
   padding-bottom: 2%;
+`;
+
+export const StyledErrorP = styled(StyledP)`
+  text-align: left;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  
 `;
 
 export const StyledFooterP = styled(StyledP)`

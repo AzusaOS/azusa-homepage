@@ -1217,10 +1217,17 @@
   resolved "https://registry.yarnpkg.com/@karpeleslab/i18next-klb-backend/-/i18next-klb-backend-0.0.5.tgz#6cad1bcc2ef10902045fe6b552f73e2775d607eb"
   integrity sha512-2LX796bXiTiMbPd/NEtcTFI0xKU9ht0h9c+u8l/BaNdS/O0xgUtiJmk5n3w6ah8FPOwYeohmFh5r337HXKr9Fw==
 
-"@karpeleslab/klbfw@0.0.25", "@karpeleslab/klbfw@^0.0.25":
+"@karpeleslab/klbfw@^0.0.25":
   version "0.0.25"
   resolved "https://registry.yarnpkg.com/@karpeleslab/klbfw/-/klbfw-0.0.25.tgz#7dd595490302e9815939cc9796330060ad873afa"
   integrity sha512-enOZ0MKTucUkySrtUkkaPvU3DsxYyWnXayYTPCfSYyAUYBELsyi+XIfhNqmjgNxeA7qNe4saU8Om1d0ZGqO7Cg==
+  dependencies:
+    js-sha256 "^0.9.0"
+
+"@karpeleslab/klbfw@^0.0.26":
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/@karpeleslab/klbfw/-/klbfw-0.0.26.tgz#bc4f8554da3a3565f768ff8152a7fde760670fd2"
+  integrity sha512-cZ8DZaVFeiJSBf2gNguf3EoTn2rGi3yigbxM1L9URgYZ9+psURW/FX9U3YcGMMxSXVx2RWIXXVj6ZAqfllV1UQ==
   dependencies:
     js-sha256 "^0.9.0"
 
