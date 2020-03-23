@@ -85,9 +85,9 @@ function CmpBulmaNavbar() {
         aria-expanded="false"
         onClick={() => setActive()}
       >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+        <span aria-hidden="true"/>
+        <span aria-hidden="true"/>
+        <span aria-hidden="true"/>
       </Link>
     );
   };
@@ -109,7 +109,7 @@ function CmpBulmaNavbar() {
     return (
       <div className="navbar-end">
         {ListMenuName.map((MenuName, i) => (
-          <NavbarItem LinkName={ListMenuName[i]} LinkPath={ListMenuPath[i]} />
+          <NavbarItem key={MenuName+'-'+i} LinkName={ListMenuName[i]} LinkPath={ListMenuPath[i]} />
         ))}
       </div>
     );

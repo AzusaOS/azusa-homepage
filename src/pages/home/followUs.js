@@ -34,10 +34,10 @@ function ThirdSection() {
               Github
             </p>
             <input
-              class="input is-rounded"
+              className="input is-rounded"
               type="text"
               placeholder="Your email"
-            ></input>
+            />
           </div>
           <div className="column is-5">
             <CenterSection
