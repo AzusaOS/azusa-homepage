@@ -18,6 +18,9 @@ function Download() {
             <StyledH1BotBor>Downloads</StyledH1BotBor>
           </LeftDiv>
 
+	  <p>Coming soon</p>
+
+{/*
           <CmpDownloadBox
             title="Azusa v28.01"
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
@@ -42,6 +45,7 @@ function Download() {
             size=""
             format=""
           />
+	  */}
         </CenterSection>
       </Container>
       <CmpBulmaFooter />
