@@ -1,7 +1,7 @@
 import React from "react";
 import CmpBulmaNavbar from "../../components/CmpBulmaNavbar/CmpBulmaNavbar";
 import CmpBulmaFooter from "../../components/CmpBulmaFooter/CmpBulmaFooter";
-import CmpDownloadBox from "../download/CmpDownloadBox";
+//import CmpDownloadBox from "../download/CmpDownloadBox";
 import dlpicto from "../../img/dlpicto.png";
 import { StyledH1BotBor, CenterSection, LeftDiv, Container } from "../../components/StyledAzusaCmp";
 
